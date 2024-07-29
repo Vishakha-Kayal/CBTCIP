@@ -16,7 +16,7 @@ connectCloudinary();
 
 // CORS configuration
 const corsOptions = {
-    origin: ['http://localhost:5173', 'http://www.liveupdt.com'], // Update this to your frontend URL
+    origin: ['https://event360.onrender.com','http://localhost:5173', 'http://www.liveupdt.com'], // Update this to your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 };
