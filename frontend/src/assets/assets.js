@@ -52,6 +52,10 @@ export  const formatTime = (time) => {
   } ${period}`;
 };
 
+export const handlePriceFilter =(type)=>{
+  
+}
+
 export const eventDetails = [
   {
     id:0,

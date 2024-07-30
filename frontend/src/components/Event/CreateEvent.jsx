@@ -42,6 +42,7 @@ const CreateEvent = () => {
   // const ticketedBgStyle = ticketBoolState ? selectedDivStyle : normalStyle;
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    
     try {
       const formData = new FormData();
       formData.append("name", name);
@@ -137,6 +138,7 @@ const CreateEvent = () => {
                     className="placeholder-[#000000a9] text-[#000000a9] py-1 mt-1 block w-full rounded-md shadow-sm outline-none px-1"
                     placeholder="Lakeside Camping At Pawna"
                     onChange={(e) => setName(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -152,7 +154,7 @@ const CreateEvent = () => {
                     id="title"
                     className="placeholder-[#000000a9] text-[#000000a9] py-1 mt-1 block w-full  rounded-md outline-none px-1"
                     placeholder="Pehchaan"
-                    onChange={(e) => setOrganiser(e.target.value)}
+                    onChange={(e) => setOrganiser(e.target.value)} required
                   />
                 </div>
 
@@ -167,6 +169,7 @@ const CreateEvent = () => {
                     id="category"
                     className="block w-full rounded-md p-1 outline-none text-[#000000a9]"
                     onChange={(e) => setCategory(e.target.value)}
+                    value={category} required
                   >
                     <option value="Arts & Culture">Arts & Culture</option>
                     <option value="Food & Drink">Food & Drink</option>
@@ -209,6 +212,7 @@ const CreateEvent = () => {
                       id="day"
                       className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       onChange={(e) => setStartDate(e.target.value)}
+                      required
                     />
                   </div>
                   <div>
@@ -223,6 +227,7 @@ const CreateEvent = () => {
                       id="day"
                       className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       onChange={(e) => setEndDate(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -240,6 +245,7 @@ const CreateEvent = () => {
                       min="0"
                       max="23"
                       onChange={(e) => setStartTime(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -257,6 +263,7 @@ const CreateEvent = () => {
                       min="0"
                       max="59"
                       onChange={(e) => setEndTime(e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -276,6 +283,7 @@ const CreateEvent = () => {
                     onChange={(e) => {
                       setDescription(e.target.value);
                     }}
+                    required
                   ></textarea>
                 </div>
 
@@ -294,6 +302,7 @@ const CreateEvent = () => {
                     onChange={(e) => {
                       setLocation(e.target.value);
                     }}
+                    required
                   />
                 </div>
                 <div className="mb-6">
@@ -438,6 +447,7 @@ const CreateEvent = () => {
                     className="text-[#000000a9] placeholder-[#000000a9] py-1 mt-1 block w-full outline-none px-1 rounded-md shadow-sm "
                     placeholder="Enter Contact number"
                     onChange={(e) => setcontactInfo(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -457,6 +467,7 @@ const CreateEvent = () => {
                       onChange={(e) => {
                         setImage(e.target.files[0]);
                       }}
+                      required
                     ></input>
                     <button
                       type="button"

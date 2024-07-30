@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom"
+import { jwtDecode } from "jwt-decode";
+import { Route, Routes ,useNavigate} from "react-router-dom"
 import Navbar from "./components/Home/Navbar";
 import useWindowWidth from "./components/hooks/useWindowWidth";
 import SplashScreen from "./components/SplashScreen";
@@ -17,20 +18,39 @@ export const url = "http://localhost:3000";
 
 
 function App() {
+  const navigate = useNavigate();
   const [checkAuth, setCheckAuth] = useState(false)
+
   const isAuthenticated = () => {
     const token = localStorage.getItem("token");
-    console.log("token = ",token);
-    return !!token;
+    // console.log("token = ",token);
+    if (!token) return false;
+    try {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Current time in seconds
+      return decodedToken.exp > currentTime; // Check if token is expired
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return false;
+    }
   }
+
   const handleLogin = (token) => {
     localStorage.setItem("token", token);
     setCheckAuth(true);
   };
+
   const handleSignup = (token) => {
     localStorage.setItem("token", token);
     setCheckAuth(true);
   };
+
+  const onHandleLogout = ()=>{
+    localStorage.setItem("token","");
+    setCheckAuth(false);
+    navigate('/');  
+  }
+
   return (
     <>
       {/* <SplashScreen/> */}
@@ -38,7 +58,7 @@ function App() {
         <Routes>
           <Route path="/Signup" element={<CreateAccount onSignup={handleSignup} />} />
           <Route path="/Login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/" element={checkAuth ? <> <NavbarRegistered /><Home /></> : <> <Navbar /><Home /></>} />
+          <Route path="/" element={checkAuth ? <> <NavbarRegistered onHandleLogout={onHandleLogout}/><Home /></> : <> <Navbar /><Home /></>} />
           <Route path="/CreateEvent" element={<AuthenticatedRoute element={<CreateEvent />} isAuthenticated={isAuthenticated()} />} />
           <Route path="/AllEvents" element={<Event />} />
           <Route path='/eventpage/:id' element={<EventPage />} />

@@ -3,22 +3,72 @@ import { IoSearch } from "react-icons/io5";
 import { assets, formatTime } from "../../assets/assets";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {url} from  "../../App"
+import { url } from "../../App"
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// setEventDetails(eventDetails.filter((event) => event.eventType == e.target.name))
 
 const Event = () => {
-  const [eventDetails,setEventDetails]=useState([])
+  const [eventDetailsApi, seteventDetailsApi] = useState([]);
+  const [eventDetails, setEventDetails] = useState([]);
+  const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({ free: false, ticketed: false })
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.checked });
+  };
+
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await axios.get(`${url}/api/listEvents`);
-      setEventDetails(response.data.eventlists)
-      console.log(eventDetails);
+      // const toastId = toast.loading("Loading events...");
+
+      try {
+        const response = await axios.get(`${url}/api/listEvents`);
+        setEventDetails(response.data.eventlists);
+        seteventDetailsApi(response.data.eventlists);
+        // toast.update(toastId, {
+        //   render: "Events loaded successfully",
+        //   type: "success",
+        //   isLoading: false,
+        //   autoClose: 3000,
+        // });
+      } catch (error) {
+        setError(error.message);
+        // toast.update(toastId, {
+        //   render: "Error loading events",
+        //   type: "error",
+        //   isLoading: false,
+        //   autoClose: 3000,
+        // });
+      }
     };
     fetchEvents();
-  },[]);
+  }, []);
+
+  useEffect(
+    ()=>{
+      const applyFilters = () => {
+        if (filters.free && filters.ticketed) {
+            return eventDetailsApi.filter(event => event.eventType === "free" || event.eventType === "ticketed");
+        }
+        if (filters.free) {
+            return eventDetailsApi.filter(event => event.eventType === "free");
+        }
+        if (filters.ticketed) {
+            return eventDetailsApi.filter(event => event.eventType === "ticketed");
+        }
+        return eventDetailsApi; // Show all events if no filters are applied
+    };
+
+    setEventDetails(applyFilters());
+    console.log(filters);
+      
+  },[filters])
 
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <section
         style={{
           background:
@@ -55,13 +105,13 @@ const Event = () => {
             <h3 className="text-xl font-semibold text-[#2D2C3C]">Price</h3>
             <div className="py-3 text-[#2B293D]">
               <div>
-                <input type="checkbox" name="free" className="text-base" />
+                <input type="checkbox" name="free" className="text-base" onChange={handleFilterChange} />
                 <label htmlFor="free" className="pl-2 text-base">
                   Free
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
+                <input type="checkbox" name="ticketed" onChange={handleFilterChange} />
                 <label htmlFor="paid" className="pl-2 text-base">
                   Paid
                 </label>
@@ -73,44 +123,44 @@ const Event = () => {
             <h3 className="text-xl font-semibold text-[#2D2C3C]">Date</h3>
             <div className="py-3 text-[#2B293D]">
               <div>
-                <input type="checkbox" name="free" className="text-base" />
-                <label htmlFor="free" className="pl-2 text-base">
+                <input type="checkbox" name="today" className="text-base" />
+                <label htmlFor="today" className="pl-2 text-base">
                   Today
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="free" className="text-base" />
-                <label htmlFor="free" className="pl-2 text-base">
+                <input type="checkbox" name="tomorrow" className="text-base" />
+                <label htmlFor="tomorrow" className="pl-2 text-base">
                   Tomorrow
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
-                <label htmlFor="paid" className="pl-2 text-base">
+                <input type="checkbox" name="thisweek" />
+                <label htmlFor="This Week" className="pl-2 text-base">
                   This Week
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
-                <label htmlFor="paid" className="pl-2 text-base">
+                <input type="checkbox" name="weekend" />
+                <label htmlFor="This Week" className="pl-2 text-base">
                   This Weekend
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
-                <label htmlFor="paid" className="pl-2 text-base">
+                <input type="checkbox" name="nextweek" />
+                <label htmlFor="nextweek" className="pl-2 text-base">
                   Next Week
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
-                <label htmlFor="paid" className="pl-2 text-base">
+                <input type="checkbox" name="thismonth" />
+                <label htmlFor="thismonth" className="pl-2 text-base">
                   This Month
                 </label>
               </div>
               <div>
-                <input type="checkbox" name="paid" />
-                <label htmlFor="paid" className="pl-2 text-base">
+                <input type="checkbox" name="nextmonth" />
+                <label htmlFor="nextmonth" className="pl-2 text-base">
                   Next Month
                 </label>
               </div>
@@ -118,7 +168,7 @@ const Event = () => {
           </article>
 
           <article className="border-b-2 border-[#6F6F6F4D] py-5 font-tertiary ">
-            <h3 className="text-xl font-semibold text-[#2D2C3C]">Price</h3>
+            <h3 className="text-xl font-semibold text-[#2D2C3C]">Category</h3>
             <div className="py-3 text-[#2B293D]">
               <div>
                 <input type="checkbox" name="free" className="text-base" />
@@ -222,7 +272,7 @@ const Event = () => {
                     </div>
 
                     <div className="overflow-hidden text-[#5a5a5a] text-[0.8rem] font-semibold leading-[normal]">
-                    {event.eventType != "ticketed" ? "Free" : `INR ${event.ticketPrice}`}
+                      {event.eventType != "ticketed" ? "Free" : `INR ${event.ticketPrice}`}
                     </div>
                   </section>
                 </div>
