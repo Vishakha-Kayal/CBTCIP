@@ -43,18 +43,72 @@ export const assets = {
   freeevent,calendar
 };
 
-export  const formatTime = (time) => {
+export const formatTime = (time) => {
+  if (!time) return "Invalid time";
   const [hour, minute] = time.split(":").map(Number);
   const period = hour >= 12 ? "PM" : "AM";
-  const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
-  return `${formattedHour}:${
-    minute < 10 ? "0" + minute : minute
-  } ${period}`;
+  const formattedHour = hour % 12 || 12; 
+  return `${formattedHour}:${minute < 10 ? "0" + minute : minute} ${period}`;
 };
 
-export const handlePriceFilter =(type)=>{
-  
-}
+export const getTomorrow = () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return {
+      start: new Date(tomorrow.setHours(0, 0, 0, 0)),
+      end: new Date(tomorrow.setHours(23, 59, 59, 999)),
+  };
+};
+
+export const getThisWeek = () => {
+  const today = new Date();
+  const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay())); // Sunday
+  const lastDayOfWeek = new Date(today.setDate(firstDayOfWeek.getDate() + 6)); // Saturday
+  return {
+      start: new Date(firstDayOfWeek.setHours(0, 0, 0, 0)),
+      end: new Date(lastDayOfWeek.setHours(23, 59, 59, 999)),
+  };
+};
+
+export const getThisWeekend = () => {
+  const today = new Date();
+  const firstDayOfWeekend = new Date(today.setDate(today.getDate() - today.getDay() + 6)); // Saturday
+  const lastDayOfWeekend = new Date(today.setDate(firstDayOfWeekend.getDate() + 1)); // Sunday
+  return {
+      start: new Date(firstDayOfWeekend.setHours(0, 0, 0, 0)),
+      end: new Date(lastDayOfWeekend.setHours(23, 59, 59, 999)),
+  };
+};
+
+export const getNextWeek = () => {
+  const today = new Date();
+  const firstDayOfNextWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7)); // Next Sunday
+  const lastDayOfNextWeek = new Date(today.setDate(firstDayOfNextWeek.getDate() + 6)); // Next Saturday
+  return {
+      start: new Date(firstDayOfNextWeek.setHours(0, 0, 0, 0)),
+      end: new Date(lastDayOfNextWeek.setHours(23, 59, 59, 999)),
+  };
+};
+
+export const getThisMonth = () => {
+  const today = new Date();
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  return {
+      start: new Date(firstDayOfMonth.setHours(0, 0, 0, 0)),
+      end: new Date(lastDayOfMonth.setHours(23, 59, 59, 999)),
+  };
+};
+
+export const getNextMonth = () => {
+  const today = new Date();
+  const firstDayOfNextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  const lastDayOfNextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+  return {
+      start: new Date(firstDayOfNextMonth.setHours(0, 0, 0, 0)),
+      end: new Date(lastDayOfNextMonth.setHours(23, 59, 59, 999)),
+  };
+};
 
 export const eventDetails = [
   {
@@ -159,8 +213,7 @@ export const eventDetails = [
     id:7,
     eventName: "MindFool India Tour - Vir Das",
     eventOrganiser:"pehchaan",
-    description:"Get ready to kick off the Christmas season in Mumbai with SOUND OF CHRISTMAS - your favourite LIVE Christmas concert!city Youth Movement invites you to the 4th edition of our annual Christmas festivities - by the youth and for the youth! Feat. your favourite worship leaders, carols, quizzes and some exciting surprises!Bring your family and friends and sing along your favourite Christmas carols on the 2nd of December, 6:30 PM onwards at the Balgandharva Rang Mandir, Bandra West. Book your tickets now!3 Reasons to attend the event:1. The FIRST Christmas concert of Mumbai! 2. A special Christmas Choir! 3. Special Dance performances and many more surprises!",
-    location: "Delhi, NCR, India",
+    description:"Event Title: MindFool India Tour with Vir Das Date and Time: [Date], 8:00 PM - 9:30 PM Organizer: Pehchaan Events location: [Venue Name], [City] Description: Get ready to laugh, think, and question everything you thought you knew! 🤯🎤 Vir Das, the master of wit and observational humor, is hitting the stage as part of his MindFool India Tour. Brace yourself for an evening that blends comedy, storytelling, and a dash of irreverence. What’s in Store: Laughs Unlimited: Vir Das, known for his razor-sharp wit, will take you on a rollercoaster ride through life’s absurdities. From politics to pop culture, no topic is safe! Thought-Provoking Insights: Beyond the laughs, Vir dives deep into societal norms, identity, and the human condition. Prepare to question your own assumptions. Interactive Crowd Moments: Vir thrives on audience interaction. Who knows—you might become part of his hilarious anecdotes! Surprises: Expect the unexpected. Vir’s shows are like a box of chocolates—you never know what you’ll get (except laughter, of course).Who Should Attend: Comedy aficionados Deep thinkersAnyone seeking an escape from the mundane Fans of Vir Das (or those about to become fans!) Attire: Casual chic (because laughter looks good on everyone!) Remember, life is too short to take seriously. Grab your tickets, bring your friends, and let’s get mind-fooled together! 🤪🎟️",
     year: "AUG",
     date: "08",
     time: "8 pM - 9:30 PM",

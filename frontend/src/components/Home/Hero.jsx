@@ -1,7 +1,23 @@
 import { assets } from "../../assets/assets";
 import { IoSearch } from "react-icons/io5";
+import { useContext } from "react";
+import { listEventsContext } from "../../listEvents";
+
 
 const Hero = () => {
+  const eventState = useContext(listEventsContext);
+
+  const onHandleinput = (e) => {
+    const filteredEvents = eventState.eventDetails.filter((event) => 
+      event.category.toLowerCase().includes(e.target.value.toLowerCase())
+  );
+  eventState.setEventDetails(filteredEvents); 
+  if(e.target.value==""){
+      console.log("use context", eventState.originalEventDetails);
+      eventState.setEventDetails(eventState.originalEventDetails); 
+    }
+    if(eventState.eventDetails.length==0) return <>No searched data available</>
+}
   return (
     <>
       <section
@@ -19,9 +35,19 @@ const Hero = () => {
         </h2>
         <aside className="w-[38rem] flex bg-white mt-6 z-40 rounded">
           <div className="w-[10%] h-[3.5rem] flex justify-center items-center">
-            <IoSearch style={{width:"2rem",height:"1.8rem",fontWeight:"900"}}/>
+            <IoSearch
+              style={{ width: "2rem", height: "1.8rem", fontWeight: "900" }}
+            />
           </div>
-          <h3 className="w-[80%] h-full"> <input type="text" className="font-primary w-full h-full outline-none" placeholder="Search Events, Categories, Location,..." /></h3>
+          <h3 className="w-[80%] h-full">
+            {" "}
+            <input
+              type="text"
+              className="font-primary w-full h-full outline-none"
+              placeholder="Search Events, Categories, Location,..."
+              onChange={onHandleinput}
+            />
+          </h3>
         </aside>
       </section>
     </>

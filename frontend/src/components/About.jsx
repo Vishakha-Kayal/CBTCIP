@@ -47,13 +47,13 @@ const About = () => {
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M303.866 6.55758C367.026 6.06796 437.644 -15.2366 488.897 21.6761C539.997 58.4789 533.418 135.561 561.352 192.001C590.527 250.948 661.953 294.745 656.489 360.29C651.043 425.623 576.696 459.272 534.863 509.751C491.848 561.656 471.388 640.891 407.11 661.207C342.812 681.53 280.024 630.134 215.45 610.706C151.396 591.435 70.6831 600.058 29.27 547.529C-12.161 494.977 14.9433 418.482 11.2271 351.665C7.8836 291.549 -10.567 231.816 8.5352 174.717C28.7666 114.243 65.2545 56.0835 120.669 24.5306C175.093 -6.45765 241.241 7.04305 303.866 6.55758Z"
-                  fill="#FFE047"
+                  fill="#ffe0476f"
                   fill-opacity="0.8"
                 />
               </svg>
             </div>
           </div>
-          <div className="md:w-[50%] pr-6 flex flex-col md:bg-[#ffe047e1] p-2 rounded-lg font-tertiary">
+          <div className="md:w-[50%] pr-6 flex flex-col p-2 rounded-lg font-tertiary">
             <section className="border-b-black border-[1px] pb-4 ">
               <h1 className="text-2xl font-semibold font-primary mb-6">
                 What We Offer ?

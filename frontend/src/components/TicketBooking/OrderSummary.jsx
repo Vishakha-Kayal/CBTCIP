@@ -5,7 +5,7 @@ import { GoArrowLeft } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 
-const OrderSummary = ({ onHandleCheckoutBack }) => {
+const OrderSummary = ({ onHandleCheckoutBack ,event}) => {
   const boxShadowStyle = {
     boxShadow: "-0px 4px 10px 0px rgba(29, 29, 29, 0.25)",
   };
@@ -28,7 +28,7 @@ const OrderSummary = ({ onHandleCheckoutBack }) => {
         <section className="w-full  h-[45%] flex justify-center pt-8">
           <div className="bg-white w-[70%] h-[60%] border-t-[3px] relative border-blue-600">
             <h3 className="absolute left-[27%] font-semibold tracking-tighter text-2xl text-[#4872C6]">
-              Standard Ticket
+            {event.ticketName} Ticket
             </h3>
             <div className="h-full flex justify-between items-center overflow-hidden">
               <div className="w-9 h-9 bg-[#F1F3F6] rounded-full absolute top-1/2 transform -translate-y-1/2 right-[-4%] checkoutRightShadowStyle "></div>
@@ -44,7 +44,7 @@ const OrderSummary = ({ onHandleCheckoutBack }) => {
                   <h6 className="h-full inline-block">
                     <LiaRupeeSignSolid style={{ fontWeight: "100" }} />
                   </h6>
-                  <h6 className="">200.00</h6>
+                  <h6 className="">{event.ticketPrice}</h6>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@ const OrderSummary = ({ onHandleCheckoutBack }) => {
                 <p className="text-lg font-semibold">
                   <LiaRupeeSignSolid style={{ marginTop: "5px" }} />
                 </p>
-                <p className="text-lg font-semibold">200.00</p>
+                <p className="text-lg font-semibold">{event.ticketPrice}</p>
               </div>
               <div className="flex items-center pl-3">
                 <p className="text-lg font-semibold">
@@ -84,7 +84,7 @@ const OrderSummary = ({ onHandleCheckoutBack }) => {
               <h6 className="h-full text-xl">
                 <FaRupeeSign style={{ fontWeight: "100", color: "#287921" }} />
               </h6>
-              <h6 className="text-[#287921] font-bold text-2xl">200.00</h6>
+              <h6 className="text-[#287921] font-bold text-2xl">{event.ticketPrice}</h6>
             </div>
           </div>
           <div>

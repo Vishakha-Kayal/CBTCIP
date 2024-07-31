@@ -11,8 +11,8 @@ const Home = () => {
     <>
       <Hero/>
       <Categories/>
-      <GetStart/>
       <Events/>
+      <GetStart/>
       <CreateWithUs />
       <Newsletter />
       <Footer />

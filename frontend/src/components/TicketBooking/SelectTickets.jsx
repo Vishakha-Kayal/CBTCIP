@@ -7,7 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import OrderSummary from "./OrderSummary";
 
-const SelectTickets = ({ onHandleCloseTicket }) => {
+const SelectTickets = ({ onHandleCloseTicket ,event}) => {
   const selectTicket = useRef();
   const [showAttendeeDetails, setShowAttendeeDetails] = useState(false);
   const [showCheckoutDetails, setShowCheckoutDetails] = useState(false);
@@ -36,7 +36,7 @@ const SelectTickets = ({ onHandleCloseTicket }) => {
   }
   return (
     <>
-      {showCheckoutDetails && <OrderSummary onHandleCheckoutBack={onHandleCheckoutBack}/>}
+      {showCheckoutDetails && <OrderSummary onHandleCheckoutBack={onHandleCheckoutBack} event={event}/>}
       {showAttendeeDetails && <AttendeeDetails onHandleBack={onHandleBack} handleProceedCheckout={handleProceedCheckout} />}
       <main
         ref={selectTicket}
@@ -61,10 +61,10 @@ const SelectTickets = ({ onHandleCloseTicket }) => {
             </div>
             <div className="py-4 flex justify-between border-l-[7px] border-green-800 bg-white px-3">
               <div className="flex flex-col">
-                <h3 className="text-2xl font-semibold">Standard Ticket</h3>
+                <h3 className="text-2xl font-semibold">{event.ticketName}</h3>
                 <div className="flex items-center">
                   <FaRupeeSign />
-                  <p>200.00</p>
+                  <p>{event.ticketPrice}</p>
                 </div>
               </div>
               <div className="flex items-center text-2xl gap-2 font-bold">
@@ -85,7 +85,7 @@ const SelectTickets = ({ onHandleCloseTicket }) => {
               <span className="text-green-800">
                 <div className="flex items-center">
                   <FaRupeeSign />
-                  <p> 200</p>
+                  <p>{event.ticketPrice}</p>
                 </div>
               </span>
             </h4>

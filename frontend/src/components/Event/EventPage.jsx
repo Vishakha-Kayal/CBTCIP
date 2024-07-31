@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
-import { assets } from "../../assets/assets";
+import { assets ,formatTime} from "../../assets/assets";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
@@ -36,7 +36,7 @@ const EventPage = () => {
     <>
       <main className="w-full min-h-screen bg-[#E9E8E5] relative">
         {buyTicket && (
-          <SelectTickets onHandleCloseTicket={onHandleCloseTicket} />
+          <SelectTickets onHandleCloseTicket={onHandleCloseTicket} event={event}/>
         )}
         <div
           className={`z-20 flex w-full min-h-screen pt-6 font-tertiary bg-[#E9E8E5] ${
@@ -81,7 +81,8 @@ const EventPage = () => {
                     </article>
                     <article className="flex gap-3 items-center">
                       <FiClock />
-                      6:30 PM - 9:30 PM
+                      <span>{formatTime(event.startTime)} </span>-{" "}
+                      <span>{formatTime(event.endTime)}</span>
                     </article>
                   </div>
 
@@ -93,16 +94,16 @@ const EventPage = () => {
                         alt="ticket"
                         className="w-5 h-5"
                       />
-                      <p className="text-sm"> Standard Ticket: ₹ 200 each</p>
+                      <p className="text-sm"><span>{event.eventType==="free"?"It's Free":` Standard Ticket: ₹ ${event.ticketPrice} each`}</span></p>
                     </div>
                     <div
-                      className="mt-1 flex  gap-3 bg-[#FFE047] py-1 px-2 w-[65%] rounded-lg cursor-pointer"
+                      className={event.eventType==="free"?`hidden`:`mt-1 flex  gap-3 bg-[#FFE047] py-1 px-2 w-[75%] rounded-lg cursor-pointer`}
                       onClick={onHandleBuyTicketClick}
                     >
                       <img
                         src={assets.ticketicon}
                         alt="ticket"
-                        className="w-5 h-5"
+                        className="h-5"
                       />
                       Buy Tickets
                     </div>
@@ -125,11 +126,11 @@ const EventPage = () => {
                     Hosted By{" "}
                     <span className="text-[#2B293D] inline-block px-2 rounded uppercase font-mono bg-[#FFE047] ">
                       {" "}
-                      {event.eventOrganiser}
+                      {event.organiser}
                     </span>
                   </p>
                   <p className="font-semibold text-lg">
-                    Contact for more info at : {event.contactNumber}
+                    Contact for more info at : {event.contactInformation}
                   </p>
                 </div>
               </section>
