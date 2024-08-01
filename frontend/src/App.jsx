@@ -15,8 +15,8 @@ import Contact from "./components/Contact";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import NavbarRegistered from "./components/Home/NavbarRegistered";
 // import useWindowWidth from "./components/hooks/useWindowWidth";
-export const url = "https://event360.onrender.com";
-// export const url = "http://localhost:3000";
+// export const url = "https://event360.onrender.com";
+export const url = "http://localhost:3000";
 
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
       const currentTime = Date.now() / 1000;
       console.log("currenttime",currentTime); // Current time in seconds
       console.log("decodedtime",decodedToken.exp); // Current time in seconds
-      if(decodedToken.exp > currentTime){
-        localStorage.removeItem("token");
-      }
+      // if(decodedToken.exp > currentTime){
+      //   localStorage.removeItem("token");
+      // }
       return decodedToken.exp > currentTime; // Check if token is expired
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -61,7 +61,7 @@ function App() {
 
   return (
     <>
-      <SplashScreen/>
+      {/* <SplashScreen/> */}
       <main className="w-full h-full  bg-[#7e79672c]">
         <Routes>
           <Route path="/Signup" element={<CreateAccount onSignup={handleSignup} />} />
