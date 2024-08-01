@@ -27,11 +27,12 @@ const SelectTickets = ({ onHandleCloseTicket ,event}) => {
     const token = localStorage.getItem("token");
     const decodedToken = jwtDecode(token);
     const currentTime = Date.now() / 1000;
-    if(token && decodedToken.exp > currentTime){
+    if(token && typeof token === 'string' && decodedToken.exp>currentTime){
       console.log("token",token);
       setShowAttendeeDetails(true);
     }
     else{
+      console.log("token expired or invalid");
       navigate("/login")
     }
     selectTicket.current.style.display = "none";
