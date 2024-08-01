@@ -28,7 +28,12 @@ function App() {
     if (!token) return false;
     try {
       const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000; // Current time in seconds
+      const currentTime = Date.now() / 1000;
+      console.log("currenttime",currentTime); // Current time in seconds
+      console.log("decodedtime",decodedToken.exp); // Current time in seconds
+      // if(decodedToken.exp > currentTime){
+      //   localStorage.removeItem("token");
+      // }
       return decodedToken.exp > currentTime; // Check if token is expired
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -37,7 +42,8 @@ function App() {
   }
 
   const handleLogin = (token) => {
-    localStorage.setItem("token", token);
+    console.log("handleLogin called");
+    localStorage.setItem("token", token); 
     setCheckAuth(true);
   };
 
@@ -54,7 +60,7 @@ function App() {
 
   return (
     <>
-      <SplashScreen/>
+      {/* <SplashScreen/> */}
       <main className="w-full h-full  bg-[#7e79672c]">
         <Routes>
           <Route path="/Signup" element={<CreateAccount onSignup={handleSignup} />} />
@@ -62,7 +68,7 @@ function App() {
           <Route path="/" element={checkAuth ? <> <NavbarRegistered onHandleLogout={onHandleLogout}/><Home /></> : <> <Navbar /><Home /></>} />
           <Route path="/CreateEvent" element={<AuthenticatedRoute element={<CreateEvent />} isAuthenticated={isAuthenticated()} />} />
           <Route path="/AllEvents" element={<Event />} />
-          <Route path='/eventpage/:id' element={<EventPage />} />
+          <Route path='/api/eventpage/:id' element={<EventPage />} />
           <Route path='/About' element={<About />} />
           <Route path='/Contact' element={<Contact />} />
         </Routes>

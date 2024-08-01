@@ -23,8 +23,8 @@ const Login = ({onLogin}) => {
         email: email.toLowerCase(), // Ensure email is in lowercase
         password,
     });
-      console.log(response.data)
-      if (response.data.success) {
+    if (response.data.success) {
+        console.log("response.data.token",response.data.token)
         onLogin(response.data.token);
         toast.success("loggedin Successfully");
         navigate('/')

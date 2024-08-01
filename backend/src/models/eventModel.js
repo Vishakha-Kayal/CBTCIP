@@ -28,9 +28,9 @@ const eventSchema = new mongoose.Schema({
     contactInformation: { type: String, required: true },
     banner: { type: String, required: true } ,
     attendee:[attendeeData],
-    eventType: { type: String, enum: ['ticketed', 'free'], required: true }, // New field
-    ticketName: { type: String }, // New field for ticket name
-    ticketPrice: { type: Number }, // New field for ticket price
+    eventType: { type: String, enum: ['ticketed', 'free'], required: true }, 
+    ticketName: { type: String }, 
+    ticketPrice: { type: Number }, 
 }, { timestamps: true });
 
 

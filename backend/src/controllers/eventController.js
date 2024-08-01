@@ -85,4 +85,19 @@ const listEvents = async (req, res) => {
   }
 }
 
-export { createEvent, listEvents }
+const addAttendeeData = async(req,res)=>{
+  try {
+    const user = await userModel.findById(req.user._id);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+    const event = await eventModel.findOne({creator:user._id});
+    console.log(event);
+    console.log(req.body);
+  } catch (error) {
+    console.error("Error in addAttendeeData:", error); // Log any errors
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+
+}
+export { createEvent, listEvents,addAttendeeData }

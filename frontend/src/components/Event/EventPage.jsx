@@ -18,7 +18,7 @@ const EventPage = () => {
     const fetchEvents = async () => {
       const response = await axios.get(`${url}/api/listEvents`);
       const eventDetails = await response.data.eventlists;
-      console.log(eventDetails);
+      // console.log(eventDetails);
       setEvent(eventDetails[id]);
     };
     fetchEvents();

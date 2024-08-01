@@ -6,9 +6,13 @@ import { TbCircleMinus } from "react-icons/tb";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import OrderSummary from "./OrderSummary";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 
 const SelectTickets = ({ onHandleCloseTicket ,event}) => {
   const selectTicket = useRef();
+  const navigate = useNavigate();
   const [showAttendeeDetails, setShowAttendeeDetails] = useState(false);
   const [showCheckoutDetails, setShowCheckoutDetails] = useState(false);
 
@@ -20,7 +24,16 @@ const SelectTickets = ({ onHandleCloseTicket ,event}) => {
   }
 
   const handleProceedClick = () => {
-    setShowAttendeeDetails(true);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    if(token && decodedToken.exp > currentTime){
+      console.log("token",token);
+      setShowAttendeeDetails(true);
+    }
+    else{
+      navigate("/login")
+    }
     selectTicket.current.style.display = "none";
   };
 

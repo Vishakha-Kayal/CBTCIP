@@ -36,7 +36,7 @@ const PopularEvents = ({ eventDetails }) => {
           <div
             className="eventDiv flex flex-col w-full mb-2 cursor-pointer hover:bg-[#f7f6f5] transition-all ease-linear 2s h-[27rem]"
             key={i}
-            onClick={() => navigate(`/eventpage/${event.id}`)}
+            onClick={() => navigate(`/api/eventpage/${event.id}`)}
           >
             <div className="w-full h-[60%] overflow-hidden relative">
               <img

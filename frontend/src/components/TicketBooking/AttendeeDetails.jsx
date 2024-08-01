@@ -2,23 +2,29 @@ import { GoArrowLeft } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { assets } from "../../assets/assets.js";
 import { LiaRupeeSignSolid } from "react-icons/lia";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import axios from "axios";
 import { url } from "../../App.jsx";
+import { useParams } from "react-router-dom";
+
 
 const AttendeeDetails = ({ onHandleBack, handleProceedCheckout }) => {
+  const { id }=useParams();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+  const formRef = useRef(null); 
+
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("fullName",fullName)
     formData.append("email",email)
     formData.append("contactNumber",contactNumber)
-    const response = await axios.post(`${URL}`,formData);
+    const response = await axios.post(`${url}/api/eventpage/${id}/addAttendeeData`,formData);
     if(response.data.success){
       console.log("attendee data created succssfully.");
+      handleProceedCheckout()
     }else{
       console.log("something went wrong.");
     }
@@ -48,7 +54,7 @@ const AttendeeDetails = ({ onHandleBack, handleProceedCheckout }) => {
               Standard Ticket: Ticket #<span>1</span>
             </h4>
             <div className="w-[88%] m-auto py-4 flex justify-center border-t-[4px] border-blue-600 bg-white px-3">
-              <form className="w-[80%] flex flex-col" onSubmit={onHandleSubmit}>
+              <form className="w-[80%] flex flex-col" onSubmit={onHandleSubmit} ref={formRef}>
                 <div>
                   <label
                     htmlFor="Full Name"
@@ -127,14 +133,16 @@ const AttendeeDetails = ({ onHandleBack, handleProceedCheckout }) => {
             </h4>
           </div>
           <button
-            className="flex gap-2 items-center bg-[#2B293D] w-[89%] rounded py-3 justify-center text-white text-xl"
-            onClick={handleProceedCheckout}
+            className="flex gap-2 items-center bg-[#2B293D] w-[89%] rounded py-3 justify-center text-white text-xl"  
+            onClick={() => console.log(formRef.current.submit())
+            }
           >
             <p>Continue To Checkout</p>
             <div className="pt-1 flex items-end">
               <IoIosArrowForward />
             </div>
           </button>
+          
         </section>
       </main>
     </>
