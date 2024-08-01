@@ -24,6 +24,12 @@ const EventPage = () => {
     fetchEvents();
   }, []);
 
+  const eventDate = new Date(event.startDate);
+  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const options = { year: 'numeric', month: 'short', day: '2-digit' };
+  const formattedDate = eventDate.toLocaleDateString('en-US', options).replace(',', ''); 
+  console.log(eventDate);
+
   const [buyTicket, setBuyTicket] = useState(false);
   const navigate = useNavigate();
   const onHandleBuyTicketClick = () => {
@@ -77,7 +83,7 @@ const EventPage = () => {
                     </p>
                     <article className="flex gap-3 items-center">
                       <LuCalendarDays />
-                      Saturday, 2 December 2023
+                      {dayNames[eventDate.getUTCDay()]} , {formattedDate}
                     </article>
                     <article className="flex gap-3 items-center">
                       <FiClock />
