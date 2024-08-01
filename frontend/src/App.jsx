@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Route, Routes ,useNavigate} from "react-router-dom"
+import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Home/Navbar";
-import useWindowWidth from "./components/hooks/useWindowWidth";
 import SplashScreen from "./components/SplashScreen";
 import Home from "./components/Home/Home";
 import CreateAccount from "./components/Signup";
@@ -14,6 +14,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import NavbarRegistered from "./components/Home/NavbarRegistered";
+// import useWindowWidth from "./components/hooks/useWindowWidth";
 export const url = "https://event360.onrender.com";
 // export const url = "http://localhost:3000";
 
@@ -31,9 +32,9 @@ function App() {
       const currentTime = Date.now() / 1000;
       console.log("currenttime",currentTime); // Current time in seconds
       console.log("decodedtime",decodedToken.exp); // Current time in seconds
-      // if(decodedToken.exp > currentTime){
-      //   localStorage.removeItem("token");
-      // }
+      if(decodedToken.exp > currentTime){
+        localStorage.removeItem("token");
+      }
       return decodedToken.exp > currentTime; // Check if token is expired
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -70,6 +71,7 @@ function App() {
           <Route path="/AllEvents" element={<Event />} />
           <Route path='/api/eventpage/:id' element={<EventPage />} />
           <Route path='/About' element={<About />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
           <Route path='/Contact' element={<Contact />} />
         </Routes>
       </main>

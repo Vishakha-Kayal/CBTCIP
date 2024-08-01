@@ -58,7 +58,7 @@ const NavbarRegistered = ({onHandleLogout}) => {
           <Link to="/CreateEvent">Create Event</Link>
         </p>
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item">
-          <Link to="/Login">Tickets</Link>
+          <Link to="/Dashboard">Dashboard</Link>
         </p>
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item cursor-pointer"  onClick={onHandleLogout}>
           <h5>Logout</h5>
