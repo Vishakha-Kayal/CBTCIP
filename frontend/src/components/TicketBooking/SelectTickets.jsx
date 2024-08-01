@@ -25,19 +25,27 @@ const SelectTickets = ({ onHandleCloseTicket ,event}) => {
 
   const handleProceedClick = () => {
     const token = localStorage.getItem("token");
-    const decodedToken = jwtDecode(token);
-    const currentTime = Date.now() / 1000;
-    if(token && typeof token === 'string' && decodedToken.exp>currentTime){
-      console.log("token",token);
-      setShowAttendeeDetails(true);
-    }
-    else{
-      console.log("token expired or invalid");
-      navigate("/login")
+    if (token && typeof token === 'string') {
+        try {
+            const decodedToken = jwtDecode(token);
+            const currentTime = Date.now() / 1000;
+            if (decodedToken.exp > currentTime) {
+                console.log("token", token);
+                setShowAttendeeDetails(true);
+            } else {
+                console.log("token expired");
+                navigate("/login");
+            }
+        } catch (error) {
+            console.log("Invalid token", error);
+            navigate("/login");
+        }
+    } else {
+        console.log("token not found or invalid");
+        navigate("/login");
     }
     selectTicket.current.style.display = "none";
-  };
-
+};
   const onHandleBack = () => {
     setShowAttendeeDetails(false);
     selectTicket.current.style.display = "flex";
