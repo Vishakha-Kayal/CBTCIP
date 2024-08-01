@@ -10,12 +10,12 @@ const NavbarRegistered = ({onHandleLogout}) => {
   useEffect(() => {
     const fetchUsers = async () => {
       const token = localStorage.getItem("token");
-      console.log(token);
+      // console.log(token);
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
           setUsername(decodedToken.username)
-          console.log("Username:", username);   
+          // console.log("Username:", username);   
         } catch (error) {
           console.error("Error decoding token:", error);
         }

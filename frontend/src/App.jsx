@@ -30,11 +30,6 @@ function App() {
     try {
       const decodedToken = jwtDecode(token);
       const currentTime = Date.now() / 1000;
-      console.log("currenttime",currentTime); // Current time in seconds
-      console.log("decodedtime",decodedToken.exp); // Current time in seconds
-      // if(decodedToken.exp > currentTime){
-      //   localStorage.removeItem("token");
-      // }
       return decodedToken.exp > currentTime; // Check if token is expired
     } catch (error) {
       console.error("Error decoding token:", error);
@@ -43,7 +38,7 @@ function App() {
   }
 
   const handleLogin = (token) => {
-    console.log("handleLogin called");
+    // console.log("handleLogin called");
     localStorage.setItem("token", token); 
     setCheckAuth(true);
   };

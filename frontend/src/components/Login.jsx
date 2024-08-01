@@ -24,12 +24,12 @@ const Login = ({onLogin}) => {
         password,
     });
     if (response.data.success) {
-        console.log("response.data.token",response.data.token)
+        // console.log("response.data.token",response.data.token)
         onLogin(response.data.token);
         toast.success("loggedin Successfully");
         navigate('/')
       } else {
-        console.log(response.data);
+        // console.log(response.data);
         toast.error("Something Went Wrong");
       }
     } catch (error) {
