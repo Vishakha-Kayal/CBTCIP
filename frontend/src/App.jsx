@@ -61,7 +61,7 @@ function App() {
 
   return (
     <>
-      {/* <SplashScreen/> */}
+      <SplashScreen/>
       <main className="w-full h-full  bg-[#7e79672c]">
         <Routes>
           <Route path="/Signup" element={<CreateAccount onSignup={handleSignup} />} />
