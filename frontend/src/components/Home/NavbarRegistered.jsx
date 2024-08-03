@@ -1,12 +1,11 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import NavbarLogo from "../NavbarLogo";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 
-
-const NavbarRegistered = ({onHandleLogout}) => {
-  const [username,setUsername]=useState("")
+const NavbarRegistered = ({ onHandleLogout }) => {
+  const [username, setUsername] = useState("");
   useEffect(() => {
     const fetchUsers = async () => {
       const token = localStorage.getItem("token");
@@ -14,8 +13,8 @@ const NavbarRegistered = ({onHandleLogout}) => {
       if (token) {
         try {
           const decodedToken = jwtDecode(token);
-          setUsername(decodedToken.username)
-          // console.log("Username:", username);   
+          setUsername(decodedToken.username);
+          // console.log("Username:", username);
         } catch (error) {
           console.error("Error decoding token:", error);
         }
@@ -24,10 +23,12 @@ const NavbarRegistered = ({onHandleLogout}) => {
       }
     };
     fetchUsers();
-  },[]);
+  }, []);
   return (
-    <nav className="md:px-12 w-full h-14 bg-[#2b293d] px-2 flex justify-between items-center">
-      <NavbarLogo />
+    <nav className=" w-full h-14 bg-[#2b293d] px-2 flex justify-between items-center">
+      <div className="bg-black h-full w-full flex ">
+        <NavbarLogo />
+      </div>
       <div className="mr-4 md:hidden">
         {/* <img src={ticket} alt="" className="w-8 h-8" /> */}
         <GiHamburgerMenu
@@ -39,7 +40,7 @@ const NavbarRegistered = ({onHandleLogout}) => {
           }}
         />
       </div>
-      <div className="h-full hidden md:flex gap-3 items-center justify-evenly">
+      <div className="bg-black  w-full h-full hidden md:flex gap-3 items-center justify-center">
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item">
           <Link to="/">Home</Link>
         </p>
@@ -53,14 +54,17 @@ const NavbarRegistered = ({onHandleLogout}) => {
           <Link to="/Contact">Contact</Link>
         </p>
       </div>
-      <div className="h-full hidden md:flex gap-2 items-center justify-evenly">
+      <div className="bg-black  w-full h-full hidden md:flex gap-2 items-center justify-center">
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item">
           <Link to="/CreateEvent">Create Event</Link>
         </p>
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item">
           <Link to="/Dashboard">Dashboard</Link>
         </p>
-        <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item cursor-pointer"  onClick={onHandleLogout}>
+        <p
+          className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item cursor-pointer"
+          onClick={onHandleLogout}
+        >
           <h5>Logout</h5>
         </p>
         <p className="bg-[#FFE047] px-2 font-bold rounded uppercase">

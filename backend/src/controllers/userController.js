@@ -1,3 +1,4 @@
+import eventModel from "../models/eventModel.js";
 import userModel from "../models/userModel.js";
 
 const createUser = async (req, res) => {
@@ -43,17 +44,59 @@ const authUser = async (req, res) => {
 };
 
 const getUserWithId = async (req, res) => {
+  console.log("backend url entered");
   const userId = req.params.userId;
   try {
-      const user = await userModel.findById(userId); // Assuming you have a User model
+      const user = await userModel.findById(userId); 
       if (!user) {
           return res.status(404).json({ message: "User not found" });
       }
-      res.status(200).json(user);
+      const event = await eventModel.findOne({creator:userId})
+      console.log("event",event);
+      res.json({success:true,userEvent:event})
+      // res.status(200).json(user);
   } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Server error" });
   }
 };
 
-export { createUser, authUser ,getUserWithId};
+const editEvent = async (req, res) => {
+  console.log("backend url entered");
+  // const userId = req.params.userId;
+  // try {
+  //     const user = await userModel.findById(userId); 
+  //     if (!user) {
+  //         return res.status(404).json({ message: "User not found" });
+  //     }
+  //     const event = await eventModel.findOne({creator:userId})
+  //     console.log("event",event);
+  //     res.json({success:true,userEvent:event})
+  //     // res.status(200).json(user);
+  // } catch (error) {
+  //     console.error(error);
+  //     res.status(500).json({ message: "Server error" });
+  // }
+};
+
+const deleteEvent = async (req, res) => {
+  console.log("backend url entered");
+  const userId = req.params.userId;
+  try {
+      const user = await userModel.findById(userId); 
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
+      }
+      const event = await eventModel.findOne({creator:userId})
+      console.log("event",event);
+      await event.deleteOne();
+      res.json({success:true,userEvent:event})
+      // res.status(200).json(user);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export { createUser, authUser ,getUserWithId , deleteEvent,editEvent};

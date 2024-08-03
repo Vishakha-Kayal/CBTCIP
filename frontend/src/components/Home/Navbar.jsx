@@ -17,10 +17,10 @@ const Navbar = () => {
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item"><Link to="/About">AboutUs</Link></p>
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item"><Link to="/Contact">Contact</Link></p>
       </div>
-      <div className="h-full hidden md:flex gap-3 items-center justify-evenly">
+      <div className="h-full hidden md:flex gap-3 md:items-center md:justify-evenly">
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item"><Link to="/CreateEvent">Create Event</Link></p>
         <p className="flex items-center px-2 text-xl relative font-secondary text-[#FFE047] nav-item"><Link to="/Login">Login</Link></p>
-        <p className="bg-[#FFE047] px-2 py-1 rounded"><Link to="/SignUp">Sign Up</Link></p>
+        <p className="bg-[#FFE047] px-2 text-xl font-secondary flex items-center rounded"><Link to="/SignUp">Sign Up</Link></p>
       </div>
 
     </nav>
