@@ -76,7 +76,7 @@ body {
 
 
 @media (max-width:640px) {
-  .marquee {
+  /* .marquee {
     animation: infinitymarquee 6s linear infinite;
   }
 
@@ -88,7 +88,7 @@ body {
     to {
       transform: translateX(-100%);
     }
-  }
+  } */
 }
 
 /* .marquee {
