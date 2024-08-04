@@ -10,10 +10,10 @@ const GetStart = () => {
       style={{ backgroundImage: `url(${assets.personalised})` }}
     >
       <div className="w-full md:w-[73%] flex flex-col items-start justify-center gap-3 font-primary">
-        <p className="w-full font-primary font-bold text-assignment-1dark-bluish-grey text-3xl tracking-[0] leading-[normal]">
+        <p className="w-full font-primary font-bold text-assignment-1dark-bluish-grey text-xl md:text-3xl tracking-[0] leading-[normal]">
           Events specially curated for you!
         </p>
-        <p className="text-[#2D2C3C] font-normal text-assignment-1 text-xl tracking-[0] leading-[normal]">
+        <p className="text-[#2D2C3C] font-normal text-assignment-1 text-lg md:text-xl tracking-[0] leading-[normal]">
           Get event suggestions tailored to your interests! Don&#39;t let your
           favorite events slip away.
         </p>

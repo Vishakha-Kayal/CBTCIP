@@ -3,10 +3,10 @@ import { FaRegCopyright } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="h-[27rem] bg-[#2B293D]">
-      <div className="w-[89%] h-[85%] m-auto py-8 grid grid-cols-4 border-b-[1px] border-[#A9A9A9] mb-4">
+    <footer className="md:h-[27rem] bg-[#2B293D] pb-3">
+      <div className="w-[89%] h-[85%] m-auto py-8 grid grid-cols-2 md:grid-cols-4 border-b-[1px] border-[#A9A9A9] mb-4">
         <aside className="flex flex-col gap-4">
-          <div className="text-[#FFFFFF] font-semibold font-primary text-2xl">
+          <div className="text-[#FFFFFF] font-semibold font-primary text-lg md:text-2xl">
             Company Info
           </div>
           <div className="text-[#A9A9A9] flex flex-col gap-1 text-base">
@@ -18,8 +18,8 @@ const Footer = () => {
             <p>Privacy Policy</p>
           </div>
         </aside>
-        <aside className="flex flex-col gap-4">
-          <div className="text-[#FFFFFF] font-semibold font-primary text-2xl">
+        <aside className="flex flex-col gap-4 ">
+          <div className="text-[#FFFFFF] font-semibold font-primary text-lg md:text-2xl">
             Help
           </div>
           <div className="text-[#A9A9A9] flex flex-col gap-1 text-base">
@@ -29,8 +29,8 @@ const Footer = () => {
             <p>Ticket Purchase Terms & Conditions</p>
           </div>
         </aside>
-        <aside className="flex flex-col gap-4">
-          <div className="text-[#FFFFFF] font-semibold font-primary text-2xl">
+        <aside className="flex flex-col gap-4 ">
+          <div className="text-[#FFFFFF] font-semibold font-primary text-lg md:text-2xl">
             Categories
           </div>
           <div className="text-[#A9A9A9] flex flex-col gap-1 text-base">
@@ -44,8 +44,8 @@ const Footer = () => {
             <p>Workshops, Conferences & Classes</p>
           </div>
         </aside>
-        <aside className="flex flex-col gap-4">
-          <div className="text-[#FFFFFF] font-semibold font-primary text-2xl">
+        <aside className="flex flex-col gap-4 ">
+          <div className="text-[#FFFFFF] font-semibold font-primary text-lg md:text-2xl">
             Follow Us
           </div>
           <div className="text-[#A9A9A9] flex flex-col gap-1 text-base">

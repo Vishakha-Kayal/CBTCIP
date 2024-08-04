@@ -8,15 +8,15 @@ const CreateWithUs = () => {
       style={{ backgroundImage: `url(${assets.homebgplan})` }}
     >
       <div className="flex flex-col items-start justify-center gap-3 font-primary py-20">
-        <p className="font-primary font-medium text-[#FFE047] text-2xl tracking-[0] leading-[normal]">
+        <p className="font-primary font-medium text-[#FFE047] text-xl md:text-2xl tracking-[0] leading-[normal]">
           Create an event with Eventify
         </p>
-        <p className="text-[#FFE047] font-normal text-assignment-1 text-sm tracking-[0] leading-[normal]">
+        <p className="text-[#FFE047] md:font-normal text-assignment-1 text-xs font-bold md:text-sm tracking-[0] leading-[normal]">
           Got a show, event, activity or a great experience? Partner with us &
           get listed on Eventify.
         </p>
       </div>
-      <div className="text-[#2B293D] bg-[#FFE047] flex gap-2 items-center px-4 rounded h-[30%]">
+      <div className="text-[#2B293D] bg-[#FFE047] hidden md:flex gap-2 items-center px-4 rounded h-[30%]">
         <FaRegCalendarPlus />
         <p className="text-lg font-medium">Create Event</p>
       </div>
