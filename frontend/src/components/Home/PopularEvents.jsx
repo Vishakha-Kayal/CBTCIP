@@ -20,7 +20,7 @@ const PopularEvents = ({ eventDetails }) => {
 
   return (
     <>
-      {eventDetails.map((event, i) => {
+      {eventDetails.slice(0, 6).map((event, i) => {
         const dateObj = new Date(event.startDate);
         const monthNames = [
           "JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
