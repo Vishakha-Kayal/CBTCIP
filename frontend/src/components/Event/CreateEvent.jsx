@@ -83,6 +83,21 @@ const CreateEvent = () => {
       );
       toast.error("An error occurred while creating the account.");
     }
+    setName("")
+    setOrganiser("")
+    setStartDate("")
+    setEndDate("")
+    setCategory("")
+    setStartTime("")
+    setEndTime("")
+    setTicketBoolState("")
+    setTicketName("")
+    setTicketPrice("")
+    setEventType("")
+    setImage("")
+    setLocation("")
+    setDescription("")
+    setcontactInfo("")
   };
   useEffect(() => {
     console.log("ticketBoolState updated:", ticketBoolState);
