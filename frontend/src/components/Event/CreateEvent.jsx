@@ -135,7 +135,7 @@ const CreateEvent = () => {
                   <input
                     type="text"
                     id="title"
-                    className="placeholder-[#000000a9] text-[#000000a9] py-1 mt-1 block w-full rounded-md shadow-sm outline-none px-1"
+                    className="placeholder-[#00000061] text-[#000000a9] py-1 mt-1 block w-full rounded-md shadow-sm outline-none px-1"
                     placeholder="Lakeside Camping At Pawna"
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -152,13 +152,13 @@ const CreateEvent = () => {
                   <input
                     type="text"
                     id="title"
-                    className="placeholder-[#000000a9] text-[#000000a9] py-1 mt-1 block w-full  rounded-md outline-none px-1"
+                    className="placeholder-[#00000061] text-[#000000a9] py-1 mt-1 block w-full  rounded-md outline-none px-1"
                     placeholder="Pehchaan"
                     onChange={(e) => setOrganiser(e.target.value)} required
                   />
                 </div>
 
-                <div className="mb-6 placeholder-[#000000a9]">
+                <div className="mb-6">
                   <label
                     htmlFor="category"
                     className="block text-[1.2rem] font-medium text-[#FFE047] "
@@ -167,7 +167,7 @@ const CreateEvent = () => {
                   </label>
                   <select
                     id="category"
-                    className="block w-full rounded-md p-1 outline-none text-[#000000a9]"
+                    className="block w-full rounded-md p-1 outline-none text-[#000000]"
                     onChange={(e) => setCategory(e.target.value)}
                     value={category} required
                   >
@@ -278,7 +278,7 @@ const CreateEvent = () => {
                   <textarea
                     id="description"
                     rows="4"
-                    className="py-1 mt-1 block w-full placeholder-[#000000a9] text-[#000000a9] rounded-md shadow-sm outline-none px-1"
+                    className="py-1 mt-1 block w-full placeholder-[#00000061] text-[#000000a9] rounded-md shadow-sm outline-none px-1"
                     placeholder="Describe what's special about your event & other important details."
                     onChange={(e) => {
                       setDescription(e.target.value);
@@ -297,7 +297,7 @@ const CreateEvent = () => {
                   <input
                     type="text"
                     id="location"
-                    className="text-[#000000a9] placeholder-[#000000a9] py-1 mt-1 block w-full outline-none px-1 rounded-md shadow-sm "
+                    className="text-[#000000a9] placeholder-[#00000061] py-1 mt-1 block w-full outline-none px-1 rounded-md shadow-sm "
                     placeholder="Bal Gandharva Rang Mandir, Mumbai"
                     onChange={(e) => {
                       setLocation(e.target.value);
@@ -398,7 +398,7 @@ const CreateEvent = () => {
                           <input
                             type="text"
                             id="location"
-                            className="text-[#000000a9] placeholder-[#000000a9] py-1 mt-1 block w-full outline-none rounded-md shadow-sm px-3"
+                            className="text-[#000000a9] placeholder-[#00000061] py-1 mt-1 block w-full outline-none rounded-md shadow-sm px-3"
                             placeholder="Ticket Name e.g. General Admission"
                             onChange={(e) => setTicketName(e.target.value)}
                             value={ticketName}
@@ -421,7 +421,7 @@ const CreateEvent = () => {
                               <input
                                 type="text"
                                 id="location"
-                                className="text-[#000000a9] placeholder-[#000000a9] py-1 mt-1 block w-full outline-none shadow-sm px-3"
+                                className="text-[#000000a9] placeholder-[#00000061] py-1 mt-1 block w-full outline-none shadow-sm px-3"
                                 placeholder="300"
                                 onChange={(e) => setTicketPrice(e.target.value)}
                                 value={ticketPrice}
@@ -444,7 +444,7 @@ const CreateEvent = () => {
                   <input
                     type="number"
                     id="location"
-                    className="text-[#000000a9] placeholder-[#000000a9] py-1 mt-1 block w-full outline-none px-1 rounded-md shadow-sm "
+                    className="text-[#000000a9] placeholder-[#00000061] py-1 mt-1 block w-full outline-none px-1 rounded-md shadow-sm "
                     placeholder="Enter Contact number"
                     onChange={(e) => setcontactInfo(e.target.value)}
                     required
@@ -484,7 +484,7 @@ const CreateEvent = () => {
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="hover:bg-[#FFE047] hover:text-[#2b293d] text-lg mb-6 font-semibold px-4 py-2 rounded-md bg-[#2b293d] text-[#FFE047] hover:placeholder-[#000000a9] transition-all 2s ease-linear cursor-pointer"
+                    className="hover:bg-[#FFE047] hover:text-[#2b293d] text-lg mb-6 font-semibold px-4 py-2 rounded-md bg-[#2b293d] text-[#FFE047] hover:placeholder-[#00000061] transition-all 2s ease-linear cursor-pointer"
                   >
                     Submit
                   </button>
