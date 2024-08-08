@@ -162,7 +162,10 @@ body {
   inset 2px 0px 3px -1px rgba(29,29,29,0.25);
 }
 
-
+.placeholder
+{
+  color:#00000061;
+}
 
 /* .checkoutDivShadowStyle{
   background:#F1F3F6;

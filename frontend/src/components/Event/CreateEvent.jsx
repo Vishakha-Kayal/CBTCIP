@@ -167,10 +167,12 @@ const CreateEvent = () => {
                   </label>
                   <select
                     id="category"
-                    className="block w-full rounded-md p-1 outline-none text-[#000000]"
+                    className="placeholder block w-full rounded-md p-1 outline-none text-[#000000]"
                     onChange={(e) => setCategory(e.target.value)}
                     value={category} required
                   >
+                       <option value="" disabled selected className="text-[#00000061] hidden">Choose Category
+                       </option>
                     <option value="Arts & Culture">Arts & Culture</option>
                     <option value="Food & Drink">Food & Drink</option>
                     <option value="Sports & Fitness">Sports & Fitness</option>
@@ -210,7 +212,7 @@ const CreateEvent = () => {
                     <input
                       type="date"
                       id="day"
-                      className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
+                      className="text-[#000000a9] placeholder py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       onChange={(e) => setStartDate(e.target.value)}
                       required
                     />
@@ -225,7 +227,7 @@ const CreateEvent = () => {
                     <input
                       type="date"
                       id="day"
-                      className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
+                      className="text-[#000000a9] placeholder py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       onChange={(e) => setEndDate(e.target.value)}
                       required
                     />
@@ -241,7 +243,7 @@ const CreateEvent = () => {
                     <input
                       type="time"
                       id="hour"
-                      className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
+                      className="text-[#000000a9] placeholder py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       min="0"
                       max="23"
                       onChange={(e) => setStartTime(e.target.value)}
@@ -259,7 +261,7 @@ const CreateEvent = () => {
                     <input
                       type="time"
                       id="minute"
-                      className="text-[#000000a9] py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
+                      className="text-[#000000a9] placeholder py-1 mt-1 block w-full border-gray-300 rounded-md shadow-sm outline-none px-1"
                       min="0"
                       max="59"
                       onChange={(e) => setEndTime(e.target.value)}
