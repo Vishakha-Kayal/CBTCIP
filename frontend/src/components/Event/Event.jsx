@@ -240,7 +240,7 @@ const Event = () => {
         </aside>
       </section>
       <section className="w-full bg-white flex h-screen py-6 px-14">
-        <aside className="w-[30%] h-full border-r-[1px] border-black flex flex-col gap-4">
+        <aside className="hidden w-[30%] h-full border-r-[1px] border-black md:flex flex-col gap-4">
           <h2 className="font-primary font-semibold tracking-tight text-3xl">
             Filters
           </h2>
@@ -448,7 +448,7 @@ const Event = () => {
           </article>*/}
 
         </aside>
-        <aside className="w-[70%] h-full">
+        <aside className="w-full md:w-[70%] h-full">
           <h2
             className="float-end font-primary font-semibold tracking-tight text-xl cursor-pointer"
             onClick={() => {
