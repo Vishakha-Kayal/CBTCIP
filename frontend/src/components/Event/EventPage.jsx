@@ -66,17 +66,17 @@ const EventPage = () => {
                   className="rounded-[1rem] w-full h-full"
                 />
               </aside>
-              <aside className="h-[40%] px-6 flex flex-col justify-center gap-4 ">
+              <aside className="md:h-[40%] px-6 flex flex-col justify-center gap-4 ">
                 <div className="flex justify-between">
-                  <h1 className="capitalize tracking-tighter font-tertiary text-[2.25rem] font-bold">
+                  <h1 className="capitalize tracking-tighter font-tertiary text-3xl md:text-[2.25rem] font-bold">
                     {event.name}
                   </h1>
-                  <div className="flex items-center gap-4 text-xl">
+                  <div className="hidden md:flex items-center gap-4 text-xl">
                     <FaStar />
                     <IoShareSocialOutline />
                   </div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col gap-3 md:flex-row  md:justify-between">
                   <div className="flex flex-col gap-2">
                     <p className="font-semibold text-lg">
                       Date And Time Information
@@ -127,8 +127,8 @@ const EventPage = () => {
                     {event.description}
                   </article>
                 </div>
-                <div className="flex justify-between items-center gap-2 ">
-                  <p className="font-bold tracking-tighter text-3xl">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 pb-10">
+                  <p className="font-bold tracking-tighter text-2xl md:text-3xl">
                     Hosted By{" "}
                     <span className="text-[#2B293D] inline-block px-2 rounded uppercase font-mono bg-[#FFE047] ">
                       {" "}
