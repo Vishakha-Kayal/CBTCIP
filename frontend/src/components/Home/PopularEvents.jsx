@@ -20,7 +20,7 @@ const PopularEvents = ({ eventDetails }) => {
     if (eventDetails && eventDetails.length > 0) {
       setEventType(eventDetails[0].eventType);
       setIsLoading(false);
-      if (loadingToast) {
+      if (isLoading==false) {
         toast.dismiss(loadingToast);
         toast.success("Events loaded successfully!");
       }
@@ -29,7 +29,7 @@ const PopularEvents = ({ eventDetails }) => {
       const timeoutId = setTimeout(() => {
         if (isLoading) {
           setIsLoading(false);
-          if (loadingToast) {
+          if (isLoading==false) {
             toast.dismiss(loadingToast);
           }
           toast.error("No events found. Please try again later.");
