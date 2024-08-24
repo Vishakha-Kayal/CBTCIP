@@ -1,15 +1,22 @@
 import { assets, formatTime } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const PopularEvents = ({ eventDetails }) => {
   const navigate = useNavigate();
   const [eventType, setEventType] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const loadingToast = toast.loading("Fetching events...");
     if (eventDetails.length > 0) {
       setEventType(eventDetails[0].eventType);
+      console.log("length",eventDetails.length);
+      setIsLoading(false);
+      toast.dismiss(loadingToast);
     }
   }, [eventDetails]);
 
