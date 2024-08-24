@@ -10,7 +10,6 @@ const PopularEvents = ({ eventDetails }) => {
   const [eventType, setEventType] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  
   useEffect(() => {
     const loadingToast = toast.loading("Fetching events...");
     
@@ -34,7 +33,6 @@ const PopularEvents = ({ eventDetails }) => {
       return () => clearTimeout(timeoutId);
     }
   }, [eventDetails]); 
-  }, [eventDetails]);
 
   // Check if eventDetails is empty
   if (eventDetails.length === 0) {
