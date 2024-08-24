@@ -10,14 +10,30 @@ const PopularEvents = ({ eventDetails }) => {
   const [eventType, setEventType] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  
   useEffect(() => {
     const loadingToast = toast.loading("Fetching events...");
-    if (eventDetails.length > 0) {
+    
+    // Check if eventDetails is not empty
+    if (eventDetails && eventDetails.length > 0) {
       setEventType(eventDetails[0].eventType);
-      console.log("length", eventDetails.length);
       setIsLoading(false);
       toast.dismiss(loadingToast);
+      toast.success("Events loaded successfully!");
+    } else {
+      // If eventDetails is empty after a certain time, show an error
+      const timeoutId = setTimeout(() => {
+        if (isLoading) {
+          setIsLoading(false);
+          toast.dismiss(loadingToast);
+          toast.error("No events found. Please try again later.");
+        }
+      }, 10000); // 10 seconds timeout
+
+      // Cleanup function
+      return () => clearTimeout(timeoutId);
     }
+  }, [eventDetails]); 
   }, [eventDetails]);
 
   // Check if eventDetails is empty
