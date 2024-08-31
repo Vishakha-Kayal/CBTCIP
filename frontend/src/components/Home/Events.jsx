@@ -24,7 +24,7 @@ const Events = () => {
       if (error) {
         toast.error(error);
       } else if (eventDetails.length > 0) {
-        toast.success("Events loaded successfully!");
+        console.log("Events loaded successfully!");
       } else {
         toast.info("No events available.");
       }
