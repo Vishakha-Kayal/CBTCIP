@@ -2,42 +2,49 @@ import Heading from "../Heading";
 import PopularEvents from "./PopularEvents";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useState } from "react";
 import { getTomorrow, getThisWeekend } from "../../assets/assets";
-import { listEventsContext } from "../../listEvents";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getEvents } from "../../api/eventApi";
 
 const Events = () => {
-  const eventState = useContext(listEventsContext);
-  const { eventDetails, originalEventDetails, isLoading, error } = eventState;
+  const [eventDetails, setEventDetails] = useState([]);
+  const [originalEventDetails, setOriginalEventDetails] = useState([]);
   const navigate = useNavigate();
   const onHandleClick = () => {
     navigate('/AllEvents')
   }
-
+  const [isPending,setIsPending]=useState(false);
   useEffect(() => {
-    if (isLoading) {
+    const fetchEvents= async () => {
+      setIsPending(true)
+      const response = await getEvents();
+      setIsPending(false)
+      setEventDetails(response.data.eventlists);
+      setOriginalEventDetails(response.data.eventlists);
+    }
+
+    if (isPending) {
       toast.loading("Fetching events...", { toastId: 'loading' });
     } else {
       toast.dismiss('loading');
-      if (error) {
-        toast.error(error);
-      } else if (eventDetails.length > 0) {
+      if (eventDetails.length > 0) {
         console.log("Events loaded successfully!");
       } else {
         toast.info("No events available.");
       }
     }
-  }, [isLoading, error, eventDetails]);
+    fetchEvents();
+  }, []);
 
-  if (isLoading) {
+  if (isPending) {
     return <div className="w-screen flex justify-center text-4xl text-red-600 mt-11 font-primary tracking-tighter font-semibold">Loading events ...</div>;
   }
 
-  if (error) {
-    return <div className="w-screen flex justify-center text-4xl text-red-600 mt-11 font-primary tracking-tighter font-semibold">Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div className="w-screen flex justify-center text-4xl text-red-600 mt-11 font-primary tracking-tighter font-semibold">Error: {error}</div>;
+  // }
 
   if (eventDetails.length === 0) {
     return <div className="w-screen flex justify-center text-4xl text-red-600 mt-11 font-primary tracking-tighter font-semibold">No events available</div>;

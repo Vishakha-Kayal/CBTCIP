@@ -1,10 +1,7 @@
 import Navbar from "../Home/Navbar";
 import { IoSearch } from "react-icons/io5";
 import { assets, formatTime } from "../../assets/assets";
-import { useEffect, useState, useContext } from "react";
-import { listEventsContext } from "../../listEvents";
-import axios from "axios";
-import { url } from "../../App";
+import { useEffect, useState} from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -15,12 +12,13 @@ import {
   getThisMonth,
   getNextMonth,
 } from "../../assets/assets";
+import { getEvents } from "../../api/eventApi";
 
 const Event = () => {
   const [eventDetailsApi, setEventDetailsApi] = useState([]);
-  const eventState = useContext(listEventsContext);
   const [eventDetails, setEventDetails] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [originalEventDetails, setOriginalEventDetails] = useState([]);
+  const [isPending, setIsPending] = useState();
 
   const [filters, setFilters] = useState({
     free: false,
@@ -43,52 +41,46 @@ const Event = () => {
   });
 
   useEffect(() => {
-    const fetchEventDetails = async () => {
-      setLoading(true); 
-      try {
-        const details = await eventState.originalEventDetails;
-        setEventDetails(details);
-        setEventDetailsApi(eventState.originalEventDetails);
-      } catch (error) {
-        console.error("Error fetching event details:", error);
-      }
-      finally{
-          setLoading(false);
-      }
-    };
-    fetchEventDetails(); 
-  }, [eventState.eventDetails, eventState.originalEventDetails]);
+    const fetchEvents = async () => {
+      const response = await getEvents();
+      setEventDetails(response.data.eventlists);
+      setOriginalEventDetails(response.data.eventlists);
+      setEventDetailsApi(response.data.eventlists);
+    }
+    fetchEvents();
+  }, []);
 
+  // Log state variables after they have been updated
+  // useEffect(() => {
+  //   console.log("event", eventDetails);
+  // }, [eventDetails, originalEventDetails, eventDetailsApi]);
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.checked });
   };
 
   const onHandleinput = (e) => {
-    console.log(eventState.eventDetails);
-    const filteredEvents = eventState.eventDetails.filter((event) =>
+    console.log("eventDetails", eventDetails);
+    const filteredEvents = eventDetails.filter((event) =>
       event.category.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setEventDetails(filteredEvents);
     if (e.target.value == "") {
-      // console.log("use contextjh", eventState.originalEventDetails);
-      setEventDetails(eventState.originalEventDetails);
+      setEventDetails(originalEventDetails);
     }
-    if (eventState.eventDetails.length == 0)
-      return <>No searched data available</>;
+    if (eventDetails.length == 0) return <>No searched data available</>;
   };
 
   useEffect(() => {
     const applyFilters = () => {
       let filteredEvents = eventDetailsApi;
+      console.log("filtered", filteredEvents);
 
       // Date Filters
       if (filters.today) {
         // const { start, end } = getTomorrow();
         filteredEvents = filteredEvents.filter((event) => {
           const eventDate = new Date(event.startDate);
-          // console.log("today's eventdate", eventDate);
-          // console.log("today's date", new Date(Date.now()));
           return eventDate == new Date(Date.now());
         });
       }
@@ -156,50 +148,47 @@ const Event = () => {
         );
       }
 
-      /*
-      
-      //Category filters
-      // if (filters.Adventure) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Travel & Adventures"
-      //   );
-      // }
-      // if (filters.Charity) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Charity & Causes"
-      //   );
-      // }
-      // if (filters.Sports) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Sports & Fitness"
-      //   );
-      // }
-      // if (filters.Business) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Business & Networking"
-      //   );
-      // }
-      // if (filters.Technology) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Technology"
-      //   );
-      // }
-      // if (filters.Food) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Food & Drink"
-      //   );
-      // }
-      // if (filters.Comedy) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Comedy & Entertainment"
-      //   );
-      // }
-      // if (filters.Arts) {
-      //   filteredEvents = filteredEvents.filter(
-      //     (event) => event.category === "Arts & Culture"
-      //   );
-      // }
-      */
+      // Category filters
+      if (filters.Adventure) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Travel & Adventures"
+        );
+      }
+      if (filters.Charity) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Charity & Causes"
+        );
+      }
+      if (filters.Sports) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Sports & Fitness"
+        );
+      }
+      if (filters.Business) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Business & Networking"
+        );
+      }
+      if (filters.Technology) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Technology"
+        );
+      }
+      if (filters.Food) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Food & Drink"
+        );
+      }
+      if (filters.Comedy) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Comedy & Entertainment"
+        );
+      }
+      if (filters.Arts) {
+        filteredEvents = filteredEvents.filter(
+          (event) => event.category === "Arts & Culture"
+        );
+      }
 
       setEventDetails(filteredEvents);
     };
@@ -349,7 +338,7 @@ const Event = () => {
             </div>
           </article>
 
-     {/*    <article className="border-b-2 border-[#6F6F6F4D] py-5 font-tertiary ">
+          <article className="border-b-2 border-[#6F6F6F4D] py-5 font-tertiary ">
             <h3 className="text-xl font-semibold text-[#2D2C3C]">Category</h3>
             <div className="py-3 text-[#2B293D]">
               <div>
@@ -445,22 +434,21 @@ const Event = () => {
                 </label>
               </div>
             </div>
-          </article>*/}
-
+          </article>
         </aside>
         <aside className="w-full md:w-[70%] h-full">
           <h2
             className="float-end font-primary font-semibold tracking-tight text-xl cursor-pointer"
             onClick={() => {
-              setEventDetails(eventState.originalEventDetails);
+              setEventDetails(originalEventDetails);
             }}
           >
             Clear All Filters
           </h2>
           <article className="w-[95%] mt-14 h-full m-auto flex flex-wrap gap-4">
-            {loading ? (
+            {isPending ? (
               <div className="flex justify-center text-2xl font-primary tracking-tighter font-semibold">
-                Loading events...
+                <div className="loader bg-slate-400"></div>
               </div>
             ) : eventDetails.length === 0 ? (
               <div className="flex justify-center text-2xl font-primary tracking-tighter font-semibold">

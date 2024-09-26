@@ -7,8 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { LuCalendarDays } from "react-icons/lu";
 import { FiClock } from "react-icons/fi";
 import SelectTickets from "../TicketBooking/SelectTickets";
-import axios from "axios";
-import { url } from "../../App";
+import { getEvents } from "../../api/eventApi";
 
 const EventPage = () => {
   const [event, setEvent] = useState({}); // Changed to useState
@@ -16,9 +15,8 @@ const EventPage = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await axios.get(`${url}/api/listEvents`);
+      const response = await getEvents();
       const eventDetails = await response.data.eventlists;
-      // console.log(eventDetails);
       setEvent(eventDetails[id]);
     };
     fetchEvents();
