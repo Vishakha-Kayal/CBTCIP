@@ -24,17 +24,6 @@ const Events = () => {
       setEventDetails(response.data.eventlists);
       setOriginalEventDetails(response.data.eventlists);
     }
-
-    if (isPending) {
-      toast.loading("Fetching events...", { toastId: 'loading' });
-    } else {
-      toast.dismiss('loading');
-      if (eventDetails.length > 0) {
-        console.log("Events loaded successfully!");
-      } else {
-        toast.info("No events available.");
-      }
-    }
     fetchEvents();
   }, []);
 
