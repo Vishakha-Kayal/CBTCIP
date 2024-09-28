@@ -6,8 +6,8 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
 import { url } from "../App";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { toast, ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const Login = ({onLogin}) => {
   const [psswdEye, setPsswdEye] = useState(false);
@@ -20,27 +20,27 @@ const Login = ({onLogin}) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${url}/users/loginuser`, {
-        email: email.toLowerCase(), // Ensure email is in lowercase
+        email: email.toLowerCase(),
         password,
     });
     if (response.data.success) {
         // console.log("response.data.token",response.data.token)
         onLogin(response.data.token);
-        toast.success("loggedin Successfully");
+        // toast.success("loggedin Successfully");
         navigate('/')
       } else {
         // console.log(response.data);
-        toast.error("Something Went Wrong");
+        // toast.error("Something Went Wrong");
       }
     } catch (error) {
       console.error("Error:", error.response ? error.response.data : error.message);
-      toast.error("An error occurred while logging the account.");
+      // toast.error("An error occurred while logging the account.");
     }
   };
 
   return (
     <>
-       <ToastContainer />
+   
       <div className="flex w-full h-screen bg-[#2B293D]">
         <section className="w-[40%] h-full  hidden md:flex flex-col gap-[10rem]">
           <div className="w-[15rem] h-14">
