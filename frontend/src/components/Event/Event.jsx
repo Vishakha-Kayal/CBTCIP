@@ -18,7 +18,7 @@ const Event = () => {
   const [eventDetailsApi, setEventDetailsApi] = useState([]);
   const [eventDetails, setEventDetails] = useState([]);
   const [originalEventDetails, setOriginalEventDetails] = useState([]);
-  const [isPending, setIsPending] = useState();
+  const [isPending, setIsPending] = useState(false);
 
   const [filters, setFilters] = useState({
     free: false,
@@ -42,7 +42,9 @@ const Event = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
+      setIsPending(true);
       const response = await getEvents();
+      setIsPending(false);
       setEventDetails(response.data.eventlists);
       setOriginalEventDetails(response.data.eventlists);
       setEventDetailsApi(response.data.eventlists);
@@ -50,10 +52,6 @@ const Event = () => {
     fetchEvents();
   }, []);
 
-  // Log state variables after they have been updated
-  // useEffect(() => {
-  //   console.log("event", eventDetails);
-  // }, [eventDetails, originalEventDetails, eventDetailsApi]);
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.checked });
@@ -447,8 +445,9 @@ const Event = () => {
           </h2>
           <article className="w-[95%] mt-14 h-full m-auto flex flex-wrap gap-4">
             {isPending ? (
-              <div className="flex justify-center text-2xl font-primary tracking-tighter font-semibold">
-                <div className="loader bg-slate-400"></div>
+              <div className="h-12 flex items-center text-2xl font-primary tracking-tighter font-semibold gap-3">
+                <h1 className="w-full h-full text-3xl text-[#FF3D00]">Fetching Events </h1>
+                <span className="loader"></span>
               </div>
             ) : eventDetails.length === 0 ? (
               <div className="flex justify-center text-2xl font-primary tracking-tighter font-semibold">
