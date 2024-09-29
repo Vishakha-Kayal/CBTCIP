@@ -1,12 +1,27 @@
 import { assets } from "../../assets/assets";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap"
+import {useGSAP} from "@gsap/react"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 const GetStart = () => {
+  useGSAP(()=>{
+    gsap.from(".punchline",{
+      opacity:0,
+      scale:0,
+      duration:1,
+      scrollTrigger:{
+        trigger:".punchline",
+        scroller:"body"
+      }
+    })
+  })
   const navigate=useNavigate();
   return (
     <div
-      className="mt-7 flex flex-col justify-center items-center bg-cover bg-[50%_50%] h-[30vh] md:mr-12 md:ml-12"
+      className="punchline mt-7 flex flex-col justify-center items-center bg-cover bg-[50%_50%] h-[30vh] md:mr-12 md:ml-12"
       style={{ backgroundImage: `url(${assets.personalised})` }}
     >
       <div className="w-full md:w-[73%] flex flex-col items-start justify-center gap-3 font-primary">

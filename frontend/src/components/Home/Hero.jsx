@@ -24,7 +24,7 @@ const Hero = () => {
         className="z-50 relative  w-full h-48 bg-cover bg-center flex flex-col items-center justify-center lg:inline-flex lg:pt-[11.25rem] lg:pr-[14.438rem] lg:pl-[14.375rem] lg:pb-[7.5rem]"
         style={{ backgroundImage: `url(${assets.HeroImage})` }}
       >
-        <div className="absolute top-0 bg-black opacity-50 w-full h-full z-30"></div>
+        <div className="heroo absolute top-0 bg-black opacity-50 w-full h-full z-30"></div>
         <h2 className="text-white w-[86%] z-40  md:relative  font-semibold md:p-0 text-xl md:text-[2rem] font-primary md:leading-[3.3rem] md:w-[100%]">
           Don’t miss out! <br></br>{" "}
           <span className="whitespace-nowrap">

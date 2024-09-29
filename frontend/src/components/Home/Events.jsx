@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getEvents } from "../../api/eventApi";
 
+
 const Events = () => {
   const [eventDetails, setEventDetails] = useState([]);
   const [originalEventDetails, setOriginalEventDetails] = useState([]);

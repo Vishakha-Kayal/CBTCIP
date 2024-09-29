@@ -2,10 +2,10 @@ import { assets, formatTime } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-
 const PopularEvents = ({ eventDetails }) => {
   const navigate = useNavigate();
   const [eventType, setEventType] = useState("");
+
 
   useEffect(() => {
     if (eventDetails.length > 0) {
