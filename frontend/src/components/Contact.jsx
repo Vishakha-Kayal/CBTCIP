@@ -1,44 +1,51 @@
-import { useState } from "react";
+import { useRef, useState,useEffect } from "react";
 import Navbar from "./Home/Navbar";
 import axios from "axios";
 import { url } from "../App.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 const Contact = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [query, setQuery] = useState("");
-
+  const submitRef = useRef();
   useEffect(() => {
     emailjs.init("H0u3msXRe-2-w21LF"); // added Public Key
-    
   }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log("Form submitted");
     try {
-      const response = await axios.post(`${url}/api/query/contact`, {
-        fname,
-        lname,
-        email,
-        query
-      }, {
-        headers: {
-          'Content-Type': 'application/json' // Set content type to JSON
-        },timeout: 10000 
-      });
+      const response = await axios.post(
+        `${url}/api/query/contact`,
+        {
+          fname,
+          lname,
+          email,
+          query,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Set content type to JSON
+          },
+          timeout: 10000,
+        }
+      );
       console.log("Response:", response.data); // Log the response
       if (response.data.success) {
-        toast.success("Event Created");
+        toast.success("Query Submitted Successfully");
       } else {
         toast.error("Something Went Wrong");
       }
     } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message); // Log any errors
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      ); // Log any errors
       toast.error("An error occurred while sending the message.");
     }
   };
@@ -68,7 +75,7 @@ const Contact = () => {
           </div>
           <div className="w-[50%] h-full right flex items-center justify-center">
             <div className="w-[70%] h-[82%] bg-[#2b293d] text-[#FFE047] font-secondary rounded-lg overflow-hidden contactFormDiv ">
-              <form onSubmit={onSubmitHandler} className="contactForm">
+              <form onSubmit={onSubmitHandler} ref={submitRef} className="contactForm">
                 <div className="w-full h-[16vh]  px-6 pt-4 flex gap-7">
                   <div className="w-[50%] h-full  flex flex-col gap-1">
                     <h3 className="text-xl font-semibold">First Name</h3>
