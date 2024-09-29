@@ -6,8 +6,8 @@ const userRouter=express.Router();
 
 userRouter.post("/createAccount",createUser)
 userRouter.post("/loginuser",authUser)
-userRouter.post("editThis/:userId",editEvent)
-userRouter.post("deleteThis/:userId",deleteEvent)
+userRouter.post("/editThis/:userId",editEvent)
+userRouter.post("/deleteThis/:userId",deleteEvent)
 userRouter.get("/userWith/:userId",getUserWithId)
 
 export default userRouter;

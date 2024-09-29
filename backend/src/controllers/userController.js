@@ -44,15 +44,15 @@ const authUser = async (req, res) => {
 };
 
 const getUserWithId = async (req, res) => {
-  console.log("backend url entered");
+  // console.log("backend url entered");
   const userId = req.params.userId;
   try {
       const user = await userModel.findById(userId); 
       if (!user) {
           return res.status(404).json({ message: "User not found" });
       }
-      const event = await eventModel.findOne({creator:userId})
-      console.log("event",event);
+      const event = await eventModel.find({creator:userId})
+      // console.log("event",event);
       res.json({success:true,userEvent:event})
       // res.status(200).json(user);
   } catch (error) {
@@ -81,17 +81,16 @@ const editEvent = async (req, res) => {
 
 const deleteEvent = async (req, res) => {
   console.log("backend url entered");
-  const userId = req.params.userId;
+  const eventId = req.params.userId;
+  // console.log("eventid = ",eventId);
+  
   try {
-      const user = await userModel.findById(userId); 
-      if (!user) {
-          return res.status(404).json({ message: "User not found" });
+      const event = await eventModel.findById(eventId); 
+      if (!event) {
+          return res.status(404).json({ message: "Event not found" });
       }
-      const event = await eventModel.findOne({creator:userId})
-      console.log("event",event);
       await event.deleteOne();
       res.json({success:true,userEvent:event})
-      // res.status(200).json(user);
   } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Server error" });
