@@ -14,8 +14,8 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import NavbarRegistered from "./components/Home/NavbarRegistered";
-// export const url = "https://event360.onrender.com";
-export const url = "http://localhost:3000";
+export const url = "https://event360.onrender.com";
+// export const url = "http://localhost:3000";
 
 
 

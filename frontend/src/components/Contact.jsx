@@ -4,12 +4,18 @@ import axios from "axios";
 import { url } from "../App.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    emailjs.init("H0u3msXRe-2-w21LF"); // added Public Key
+    
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
